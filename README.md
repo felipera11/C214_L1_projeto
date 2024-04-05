@@ -6,14 +6,13 @@ Um site para criação e cadastro de receitas culinárias.
 
 ## Funcionalidades
 
--Funcionalidades:
-    - Cadastro de receitas
-    - Cadastro de categorias
-    - Cadastro de usuários
-    - Login de usuários
-    - Update de receitas
-    - Delete de receitas
-    - Pesquisa de receitas
+- Cadastro de receitas
+- Cadastro de categorias
+- Cadastro de usuários
+- Login de usuários
+- Update de receitas
+- Delete de receitas
+- Pesquisa de receitas
 
 ## Tecnologias
 
