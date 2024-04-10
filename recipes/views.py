@@ -3,5 +3,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
+def detail(request, recipe_id):
+    return HttpResponse("You're looking at recipe %s." % recipe_id)
+
 def index(request):
     return HttpResponse("Hello, world. You're at the recipes index.")
