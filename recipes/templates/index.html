@@ -1,0 +1,27 @@
+<!-- your_app/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Receitas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Receitas</h1>
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <h2>{{ recipe.name }}</h2>
+                <p>{{ recipe.instructions }}</p>
+                <h3>Ingredientes:</h3>
+                <ul>
+                    {% for recipe_ingredient in recipe.ingredients.all %}
+                        <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.unit }} de {{ recipe_ingredient.ingredient.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
