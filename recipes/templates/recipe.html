@@ -21,6 +21,7 @@
             <p>{{ recipe.instructions }}</p>
         </div>
         
+        <a href="{% url 'edit_recipe' recipe_id=recipe.id %}" class="button">Edit Recipe</a>
         <a href="{% url 'index' %}" class="button">Back to recipe list</a>
     </div>
     <footer>
