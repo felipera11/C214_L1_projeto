@@ -12,6 +12,7 @@ body {
     width: 80%;
     margin: 0 auto;
     overflow: hidden;
+    margin-left: 100px; /* Add larger left margin */
 }
 
 h1 {
@@ -30,6 +31,13 @@ h2 {
 p {
     font-size: 1.1em;
     color: #666;
+    margin-top: 10px;
+    line-height: 1.4;
+    background: #fff; /* Background color for the box */
+    padding: 15px;    /* Padding inside the box */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #ddd; /* Optional: Light border */
 }
 
 ul {
@@ -67,6 +75,41 @@ ul li ul li {
 
 ul li ul li:nth-child(even) {
     background: #f1f8e9;
+}
+
+.instructions {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border-left: 6px solid #4CAF50;
+}
+
+.instructions p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #444;
+    line-height: 1.6;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #45a049;
 }
 
 footer {

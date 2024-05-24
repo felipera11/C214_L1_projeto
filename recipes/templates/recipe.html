@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ recipe.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ recipe.name }}</h1>
+        
+        <h2>Ingredients</h2>
+        <ul>
+            {% for recipe_ingredient in recipe.ingredients.all %}
+                <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.unit }} of {{ recipe_ingredient.ingredient.name }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h2>Instructions</h2>
+        <div class="instructions">
+            <p>{{ recipe.instructions }}</p>
+        </div>
+        
+        <a href="{% url 'index' %}" class="button">Back to recipe list</a>
+    </div>
+    <footer>
+        &copy; Korok Recipes
+    </footer>
+</body>
+</html>
