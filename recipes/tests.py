@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from .models import Ingredient, RecipeIngredient, Recipe
 
 class IngredientModelTest(TestCase):
@@ -91,3 +92,53 @@ class RecipeModelTest(TestCase):
     def test_str_representation(self):
         recipe = Recipe.objects.get(id=1)
         self.assertEqual(str(recipe), recipe.name)
+
+class RecipeViewsTestCase(TestCase):
+    def setUp(self):
+        self.ingredient = Ingredient.objects.create(name="Test Ingredient")
+        
+        self.recipe = Recipe.objects.create(name="Test Recipe", instructions="Test Instructions")
+        self.recipe_ingredient = RecipeIngredient.objects.create(
+            ingredient=self.ingredient,
+            quantity="1",
+            unit="unit",
+        )
+        self.recipe.ingredients.add(self.recipe_ingredient)
+
+    def test_index_view(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Test Recipe")
+
+    def test_recipe_view(self):
+        response = self.client.get(reverse('recipe', args=(self.recipe.id,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Test Recipe")
+        self.assertContains(response, "Test Instructions")
+        self.assertContains(response, "Test Ingredient")
+
+    def test_edit_view(self):
+        new_name = "Updated Recipe Name"
+        new_instructions = "Updated Instructions"
+        new_ingredient_name = "Updated Ingredient"
+        
+        self.ingredient.name = new_ingredient_name
+        self.ingredient.save()
+
+        response = self.client.post(reverse('edit_recipe', args=(self.recipe.id,)), {
+            'name': new_name,
+            'instructions': new_instructions,
+            'recipe_ingredients': [self.recipe_ingredient.id],
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect after successful POST
+        updated_recipe = Recipe.objects.get(pk=self.recipe.id)
+        self.assertEqual(updated_recipe.name, new_name)
+        self.assertEqual(updated_recipe.instructions, new_instructions)
+        self.assertEqual(updated_recipe.ingredients.count(), 1)
+        self.assertEqual(updated_recipe.ingredients.first().ingredient.name, new_ingredient_name)
+
+
+    def test_detail_view(self):
+        response = self.client.get(reverse('recipe', args=(self.recipe.id,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Test Recipe")
