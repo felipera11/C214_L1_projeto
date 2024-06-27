@@ -21,24 +21,7 @@ class IngredientModelTest(TestCase):
         ingredient = Ingredient.objects.get(id=1)
         self.assertEqual(str(ingredient), ingredient.name)
 
-class IngredientModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Ingredient.objects.create(name='Test Ingredient')
 
-    def test_name_label(self):
-        ingredient = Ingredient.objects.get(id=1)
-        field_label = ingredient._meta.get_field('name').verbose_name
-        self.assertEqual(field_label, 'name')
-
-    def test_name_max_length(self):
-        ingredient = Ingredient.objects.get(id=1)
-        max_length = ingredient._meta.get_field('name').max_length
-        self.assertEqual(max_length, 100)
-
-    def test_str_representation(self):
-        ingredient = Ingredient.objects.get(id=1)
-        self.assertEqual(str(ingredient), ingredient.name)
 
 class RecipeIngredientModelTest(TestCase):
     @classmethod
